@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PubMaroc – Générateur de publicités pour votre commerce</title>
+  <meta name="description" content="Créez en quelques secondes des publicités professionnelles pour Facebook et Instagram. Gratuit, simple et rapide.">
+  <style>
+    :root {
+      --bg: #f6f4ff; --card: #ffffff; --text: #1f1d2b; --muted: #6b6880;
+      --border: #e4e0f5; --primary: #6c3bf5; --primary-2: #ff4f8b;
+      --ok: #12a150; --radius: 16px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #12101c; --card: #1c1a2b; --text: #f1effa;
+        --muted: #a29fbb; --border: #2f2c47;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #fff; text-align: center; padding: 48px 20px 90px;
+    }
+    header h1 { margin: 0 0 8px; font-size: clamp(1.8rem, 5vw, 2.6rem); }
+    header p { margin: 0 auto; max-width: 560px; opacity: .95; font-size: 1.05rem; }
+    main {
+      max-width: 1000px; margin: -60px auto 40px; padding: 0 16px;
+      display: grid; gap: 20px; grid-template-columns: 1fr;
+    }
+    @media (min-width: 860px) {
+      main { grid-template-columns: 1fr 1fr; align-items: start; }
+    }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 22px; box-shadow: 0 10px 30px rgba(60, 30, 140, .10);
+    }
+    .card h2 { margin: 0 0 16px; font-size: 1.2rem; }
+    label { display: block; font-weight: 600; font-size: .92rem; margin: 14px 0 6px; }
+    .opt { font-weight: 400; color: var(--muted); }
+    input[type="text"], textarea, select {
+      width: 100%; padding: 12px 14px; font: inherit; color: var(--text);
+      background: var(--bg); border: 1.5px solid var(--border); border-radius: 12px;
+      outline: none; transition: border-color .15s, box-shadow .15s;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--primary); box-shadow: 0 0 0 3px rgba(108, 59, 245, .18);
+    }
+    textarea { resize: vertical; min-height: 90px; }
+    .row { display: grid; gap: 12px; grid-template-columns: 1fr; }
+    @media (min-width: 480px) { .row { grid-template-columns: 1fr 1fr; } }
+    .check { display: flex; align-items: center; gap: 10px; margin-top: 16px; font-weight: 500; }
+    .check input { width: 20px; height: 20px; accent-color: var(--primary); }
+    button {
+      font: inherit; cursor: pointer; border: 0; border-radius: 12px; padding: 14px 18px;
+      font-weight: 700; transition: transform .1s, opacity .15s;
+    }
+    button:active { transform: scale(.98); }
+    .btn-main {
+      width: 100%; margin-top: 20px; color: #fff; font-size: 1.05rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    }
+    .tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+    .tab { flex: 1; background: var(--bg); color: var(--muted); border: 1.5px solid var(--border); }
+    .tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    #result { min-height: 260px; font-size: 1rem; }
+    .actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+    .actions button { flex: 1; min-width: 140px; }
+    .btn-copy { background: var(--ok); color: #fff; }
+    .btn-alt { background: var(--bg); color: var(--text); border: 1.5px solid var(--border); }
+    .hint { color: var(--muted); font-size: .88rem; margin-top: 12px; }
+    .error { color: #d92d4a; font-weight: 600; margin-top: 12px; min-height: 1.2em; }
+    footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 0 16px 32px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>✨ PubMaroc</h1>
+    <p>Créez en quelques secondes une publicité professionnelle pour Facebook et Instagram. Gratuit et sans inscription.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>1. Parlez-nous de votre produit</h2>
+
+      <label for="shop">Nom de votre boutique *</label>
+      <input type="text" id="shop" placeholder="Ex : Boutique Amal">
+
+      <label for="product">Nom du produit *</label>
+      <input type="text" id="product" placeholder="Ex : Caftan brodé à la main">
+
+      <label for="price">Prix *</label>
+      <input type="text" id="price" placeholder="Ex : 450 (en dirhams)" inputmode="decimal">
+
+      <label for="desc">Courte description *</label>
+      <textarea id="desc" placeholder="Ex : tissu de qualité, plusieurs couleurs, tailles S à XXL"></textarea>
+
+      <div class="row">
+        <div>
+          <label for="city">Ville <span class="opt">(facultatif)</span></label>
+          <input type="text" id="city" placeholder="Ex : Casablanca">
+        </div>
+        <div>
+          <label for="phone">WhatsApp <span class="opt">(facultatif)</span></label>
+          <input type="text" id="phone" placeholder="Ex : 06 12 34 56 78" inputmode="tel">
+        </div>
+      </div>
+
+      <label for="tone">Style du message</label>
+      <select id="tone">
+        <option value="pro">Professionnel</option>
+        <option value="chaleureux">Chaleureux et convivial</option>
+        <option value="promo">Promotion / offre à saisir</option>
+      </select>
+
+      <label class="check"><input type="checkbox" id="delivery" checked> Livraison partout au Maroc</label>
+
+      <div class="error" id="error" role="alert"></div>
+      <button class="btn-main" id="generate" type="button">🚀 Générer ma publicité</button>
+    </section>
+
+    <section class="card">
+      <h2>2. Votre publicité</h2>
+      <div class="tabs">
+        <button class="tab active" id="tab-fb" type="button">Facebook</button>
+        <button class="tab" id="tab-ig" type="button">Instagram</button>
+      </div>
+      <textarea id="result" placeholder="Votre texte apparaîtra ici après avoir cliqué sur « Générer ma publicité »."></textarea>
+      <div class="actions">
+        <button class="btn-copy" id="copy" type="button">📋 Copier le texte</button>
+        <button class="btn-alt" id="again" type="button">🔄 Autre version</button>
+      </div>
+      <p class="hint">💡 Vous pouvez modifier le texte directement dans la case avant de le copier.</p>
+      <p class="hint" id="copy-status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer>Fait avec ❤️ pour les commerçants marocains</footer>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const pick = (list) => list[Math.floor(Math.random() * list.length)];
+    const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+    const slug = (s) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "");
+
+    function formatPrice(p) {
+      p = p.trim();
+      return /^[\d\s.,]+$/.test(p) ? p + " DH" : p;
+    }
+    function cleanDesc(d) {
+      d = cap(d.trim());
+      return /[.!?…]$/.test(d) ? d : d + ".";
+    }
+
+    let currentTab = "fb";
+    let hasGenerated = false;
+
+    function readForm() {
+      return {
+        shop: $("shop").value.trim(),
+        product: $("product").value.trim(),
+        price: $("price").value.trim(),
+        desc: $("desc").value.trim(),
+        city: $("city").value.trim(),
+        phone: $("phone").value.trim(),
+        tone: $("tone").value,
+        delivery: $("delivery").checked
+      };
+    }
+
+    const hooks = {
+      pro: (d) => [
+        `✨ Découvrez ${d.product} chez ${d.shop} !`,
+        `🌟 Nouveauté chez ${d.shop} : ${d.product}`,
+        `🛍️ ${d.shop} vous présente : ${d.product}`
+      ],
+      chaleureux: (d) => [
+        `💖 Coup de cœur chez ${d.shop} : ${d.product} !`,
+        `😍 Vous allez adorer ${d.product} !`,
+        `🌸 Chez ${d.shop}, on pense à vous : ${d.product}`
+      ],
+      promo: (d) => [
+        `🔥 OFFRE À SAISIR chez ${d.shop} : ${d.product} !`,
+        `⚡ Profitez vite de ${d.product} chez ${d.shop} !`,
+        `🎉 Bon plan : ${d.product} à prix doux !`
+      ]
+    };
+
+    const ctas = {
+      pro: ["📲 Passez commande dès maintenant.", "📩 Contactez-nous pour commander.", "✅ Réservez le vôtre dès aujourd'hui."],
+      chaleureux: ["💌 Écrivez-nous, on vous répond avec plaisir !", "🤗 Venez nous voir ou commandez en message.", "📲 Un petit message et c'est réglé !"],
+      promo: ["⏳ Quantités limitées, ne tardez pas !", "🏃 Premier arrivé, premier servi !", "📲 Commandez maintenant avant la rupture de stock !"]
+    };
+
+    function contactLines(d) {
+      const lines = [];
+      if (d.phone) lines.push(`📞 WhatsApp : ${d.phone}`);
+      if (d.city) lines.push(`📍 ${d.city}`);
+      return lines;
+    }
+
+    function hashtags(d) {
+      const tags = ["#Maroc", "#Morocco", "#ShoppingMaroc"];
+      if (d.city) tags.unshift("#" + slug(d.city));
+      if (slug(d.shop)) tags.push("#" + slug(d.shop));
+      if (slug(d.product).length > 2) tags.push("#" + slug(d.product));
+      if (d.tone === "promo") tags.push("#Promo", "#BonPlan");
+      if (d.delivery) tags.push("#LivraisonMaroc");
+      return [...new Set(tags)].join(" ");
+    }
+
+    function buildFacebook(d) {
+      const parts = [pick(hooks[d.tone](d)), "", cleanDesc(d.desc), "", `💰 Prix : ${formatPrice(d.price)}`];
+      if (d.delivery) parts.push("🚚 Livraison partout au Maroc");
+      parts.push("", pick(ctas[d.tone]));
+      const contact = contactLines(d);
+      if (contact.length) parts.push("", ...contact);
+      return parts.join("\n");
+    }
+
+    function buildInstagram(d) {
+      const parts = [pick(hooks[d.tone](d)), "", cleanDesc(d.desc), "", `💰 ${formatPrice(d.price)}`];
+      if (d.delivery) parts.push("🚚 Livraison partout au Maroc");
+      parts.push("", pick(ctas[d.tone]).replace("Contactez-nous", "Envoyez-nous un message"));
+      parts.push("👉 Message privé ou WhatsApp");
+      const contact = contactLines(d);
+      if (contact.length) parts.push(...contact);
+      parts.push("", "•", "•", hashtags(d));
+      return parts.join("\n");
+    }
+
+    function generate() {
+      const d = readForm();
+      if (!d.shop || !d.product || !d.price || !d.desc) {
+        $("error").textContent = "⚠️ Merci de remplir tous les champs marqués d'une étoile (*).";
+        return;
+      }
+      $("error").textContent = "";
+      $("result").value = currentTab === "fb" ? buildFacebook(d) : buildInstagram(d);
+      hasGenerated = true;
+      if (window.innerWidth < 860) $("result").scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function setTab(tab) {
+      currentTab = tab;
+      $("tab-fb").classList.toggle("active", tab === "fb");
+      $("tab-ig").classList.toggle("active", tab === "ig");
+      if (hasGenerated) generate();
+    }
+
+    async function copyText() {
+      const text = $("result").value;
+      if (!text) {
+        $("copy-status").textContent = "Générez d'abord une publicité.";
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (e) {
+        $("result").select();
+        document.execCommand("copy");
+      }
+      $("copy-status").textContent = "✅ Texte copié !";
+    }
+
+    $("generate").addEventListener("click", generate);
+    $("again").addEventListener("click", generate);
+    $("copy").addEventListener("click", copyText);
+    $("tab-fb").addEventListener("click", () => setTab("fb"));
+    $("tab-ig").addEventListener("click", () => setTab("ig"));
+  </script>
+</body>
+</html>
